@@ -1,0 +1,41 @@
+h1{
+  color:bisque !important;
+}
+p{
+  color:brown !important;
+}
+h4{
+  color:bisque !important;
+}
+label{
+  color:burlywood !important;
+}
+.space-up {
+    margin-top:25px !important;;
+}
+.green-box{
+    border: 1px solid rgb(110, 250, 110);
+}
+.slct{
+    width:100%;
+    height:38px;
+    border-radius: .25rem;
+    line-height: 1.5;
+    padding: .375rem .75rem;
+
+}
+.ifrm{
+    width:100%;
+    height:620px;
+    background-color:#fff;
+}
+.centered{
+    text-align: center;
+}
+
+.expend{
+  height: 150px;
+}
+.white-text {
+  color:#fff;
+}
