@@ -1,20 +1,20 @@
 h1{
-  color:bisque !important;
+  color:#0d6efd;
 }
 p{
-  color:brown !important;
+  color:rgb(0, 38, 82) !important;
 }
 h4{
-  color:bisque !important;
+  color:#0d6efd;
 }
 label{
-  color:burlywood !important;
+  color:rgb(2, 48, 87) !important;
 }
 .space-up {
     margin-top:25px !important;;
 }
 .green-box{
-    border: 1px solid rgb(110, 250, 110);
+    border: 1px solid rgb(0, 29, 82);
 }
 .slct{
     width:100%;
@@ -39,3 +39,26 @@ label{
 .white-text {
   color:#fff;
 }
+.pad {
+  padding: 3px;;
+}
+.pad-out {
+  margin: 3px;;
+}
+
+.parent-div {
+  display: flex;
+}
+
+.first-div {
+  width: 50%;
+  height: 100px;
+ }
+ 
+ .second-div {
+  width: 50%;
+ height: 100px;
+ }
+ .fullwidth{
+   width: 100%;
+ }

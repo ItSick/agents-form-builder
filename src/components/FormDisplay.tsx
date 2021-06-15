@@ -1,17 +1,26 @@
-import React from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
+
+import Input from "../componentsLibrary/MTextField"
+import { FormsContext } from "../FormsContext";
 
 interface IFormDisplay {
-  initialState: {};
-  setFormDisplay: React.Dispatch<React.SetStateAction<{}>>;
+  components:  React.ReactElement<{}, string | React.JSXElementConstructor<any>>[]
 }
 
-const FormDisplay:React.FC<IFormDisplay> = ({initialState, setFormDisplay}) => {
+
+const FormDisplay:React.FC<IFormDisplay> = ({components}) => {
+  const context = useContext(FormsContext)
+  //useEffect(() => {setInterval(() => console.log(component), 2000)},[])
   return (
     <div>
     <h4>Form Display</h4>
         <div className="well green-box centered">
-            <label></label>
-            <div className="ifrm"></div>
+            <div id="canvas" >
+            {components.map((component) => {
+               return <div>{component}</div>
+              })}
+
+            </div>
         </div>
     </div>
   );

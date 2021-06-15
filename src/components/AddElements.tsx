@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "../consts/Input";
+import Input from "../consts/InputMetaData";
 import { FilledInput, FormControl, InputLabel, MenuItem, OutlinedInput, Select, TextField } from '@material-ui/core';
 import { useStore } from 'react-stores';
 import { formStore } from '../store';
