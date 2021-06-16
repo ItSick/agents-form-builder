@@ -3,12 +3,11 @@ import { FilledInput, FormControl, InputLabel, MenuItem, OutlinedInput, Select, 
 import  InputMetaData  from './consts/InputMetaData';
 import FormDisplay from  './components/FormDisplay';
 import './App.css';
-
+import { CustomTextField, CustomDatePicker, CustomButton} from './componentsLibrary/LibarayFile';
 import formService from './formService';
 
 import { MyProvider, FormsContext } from './FormsContext';
-import  MTextField from './componentsLibrary/MTextField';
-import MDatePicker from './componentsLibrary/MDatePicker';
+
 import { setTimeout } from 'timers';
 
 function App() {
@@ -40,22 +39,32 @@ function App() {
     }]
   };
 
+
+  const [formName, setFormName] = useState('[Form Name]');
+  const [category, setCategory] = useState('[Category]');
+  const [description, setDescription] = useState('[Description]');
+
   //form details events
   const handleNameChangeEvent = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     formTemplate.name = event.target.value;
+    setFormName(String(event.target.value));
   }
   const handleCategoryChangeEvent = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     formTemplate.category = event.target.value;
+    setCategory(String(event.target.value));
   }
   const handleDescriptionChangeEvent = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     formTemplate.description = event.target.value;
+    setDescription(String(event.target.value));
   }
 
   
   //element events
+  const [fieldName, setFieldName] = useState('[fieldName]');
   
   const handleFieldNameChangeEvent = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     formTemplate.fields[0].name = event.target.value;
+    setFieldName(String(event.target.value));
   }
 
   const handleFieldValueSelectEvent = (event: React.ChangeEvent<{name?: any; value: unknown; }>) => {
@@ -97,15 +106,20 @@ function App() {
 
   const [currentComp, setCurrentComp] = useState<ReactElement<{}>[]>([]);
   const [currentType, setCurrentType] = useState('text');
+  
 
   const handleAddFieldBtnClickEvent = (fieldType: string) => {
     //add field to form
-    console.log(fieldType)
+    console.log('adding ' + fieldType + ' to form')
    switch(fieldType){
-    case "text": setCurrentComp([...currentComp ,<MTextField />]) ;
+    case "text": setCurrentComp([...currentComp ,<CustomTextField fieldName={fieldName}/>]) ;
       break;
-    case "datePicker": setCurrentComp([...currentComp ,<MDatePicker />]) ;
+    case "datePicker": setCurrentComp([...currentComp ,<CustomDatePicker fieldName={fieldName} />]) ;
        break;
+     case "button": setCurrentComp([...currentComp ,<CustomButton fieldName={fieldName} />]) ;
+        break;
+    // case "label": setCurrentComp([...currentComp ,<MuiDatePicker fieldName={fieldName} />]) ;
+    //    break;
    }
 
     //send to formDisplay
@@ -224,7 +238,7 @@ function App() {
         <button type="button" className="btn btn-danger space-up fullwidth" onClick={() => handleAddFieldBtnClickEvent(currentType)}>Add Field</button>
       </div>
         <div className="col-md">
-          <FormDisplay  components={currentComp} /> 
+          <FormDisplay  components={currentComp} formName={formName} category={category} description={description} /> 
         </div>
     </div> 
     <div className="row">
