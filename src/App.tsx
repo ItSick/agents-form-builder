@@ -238,7 +238,7 @@ function App() {
         <button type="button" className="btn btn-danger space-up fullwidth" onClick={() => handleAddFieldBtnClickEvent(currentType)}>Add Field</button>
       </div>
         <div className="col-md">
-          <FormDisplay  components={currentComp} formName={formName} category={category} description={description} /> 
+          <FormDisplay  components={currentComp} formName={formName} category={category} description={description} selected={currentComp} /> 
         </div>
     </div> 
     <div className="row">
