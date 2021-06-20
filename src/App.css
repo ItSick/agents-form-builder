@@ -62,3 +62,9 @@ label{
  .fullwidth{
    width: 100%;
  }
+ .float-it-left{
+   float: left;
+ }
+ .hide{
+   display: none;
+ }

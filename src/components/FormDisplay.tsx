@@ -1,6 +1,10 @@
 import React from "react";
 import {DragDropContext,Draggable,Droppable,DroppableProvided,DraggableLocation,DropResult,DroppableStateSnapshot, DraggableProvided, DraggableStateSnapshot} from 'react-beautiful-dnd';
+import {IconButton, Menu, MenuItem} from '@material-ui/core';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+
+const ITEM_HEIGHT = 48;
 interface IMoveResult {
   droppable: React.ReactElement<{}, string | React.JSXElementConstructor<any>>[];
   droppable2: React.ReactElement<{}, string | React.JSXElementConstructor<any>>[];
@@ -123,6 +127,16 @@ const FormDisplay:React.FC<IFormDisplay> = ({components,formName,category,descri
     }
   }
 
+  const options = ['Add Attribute','Add Style','Add Validation','Delete'];
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+    //logic for options
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div>
@@ -145,10 +159,32 @@ const FormDisplay:React.FC<IFormDisplay> = ({components,formName,category,descri
                               grid
                             )}
                           >
-                            {component}
-                          </div>
-                          {providedDraggable.placeholder}
+                          <div className="row">
+                            <div className="col-md-11"> {component}</div>
+                            <div className="col-md-1">
+                                <IconButton aria-label="more" aria-controls="long-menu" aria-haspopup="true" onClick={handleClick}>
+                                  <MoreVertIcon />
+                                </IconButton>
+                                <Menu id="long-menu" anchorEl={anchorEl} keepMounted open={open} onClose={handleClose}
+                                  PaperProps={{
+                                    style: {
+                                      maxHeight: ITEM_HEIGHT * 4.5,
+                                      width: '20ch',
+                                    },
+                                  }}
+                                >
+                                  {options.map((option) => (
+                                    <MenuItem key={option} selected={option === 'Add Attribute'} onClick={handleClose}>
+                                      {option}
+                                      <hr/>
+                                    </MenuItem>
+                                  ))}
+                                </Menu>
+                            </div>
                         </div>
+                      </div>
+                      {providedDraggable.placeholder}
+                    </div>
                       )}
         </Draggable>
         )}

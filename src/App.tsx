@@ -3,7 +3,7 @@ import { FilledInput, FormControl, InputLabel, MenuItem, OutlinedInput, Select, 
 import  InputMetaData  from './consts/InputMetaData';
 import FormDisplay from  './components/FormDisplay';
 import './App.css';
-import { CustomTextField, CustomDatePicker, CustomButton} from './componentsLibrary/LibarayFile';
+import { CustomTextField, CustomDatePicker, CustomButton, CustomCheckbox} from './componentsLibrary/LibarayFile';
 import formService from './formService';
 
 import { MyProvider, FormsContext } from './FormsContext';
@@ -113,13 +113,13 @@ function App() {
     console.log('adding ' + fieldType + ' to form')
    switch(fieldType){
     case "text": setCurrentComp([...currentComp ,<CustomTextField fieldName={fieldName}/>]) ;
-      break;
+       break;
     case "datePicker": setCurrentComp([...currentComp ,<CustomDatePicker fieldName={fieldName} />]) ;
        break;
-     case "button": setCurrentComp([...currentComp ,<CustomButton fieldName={fieldName} />]) ;
+    case "button": setCurrentComp([...currentComp, <CustomButton fieldName={fieldName} onClickEvent={(fieldName: string) => alert('button ' + fieldName + ' clicked \n you can interact with the change event like this example')} />]) ;
+      break;
+    case "checkBox": setCurrentComp([...currentComp ,<CustomCheckbox fieldName={fieldName} onChangeEvent={(checked: boolean) => alert(checked +' to '+ !checked +'\n you can interact with the change event like this example')} />]) ;
         break;
-    // case "label": setCurrentComp([...currentComp ,<MuiDatePicker fieldName={fieldName} />]) ;
-    //    break;
    }
 
     //send to formDisplay
@@ -158,15 +158,15 @@ function App() {
           <h4>Form Details</h4>
             <FormControl fullWidth>
               <InputLabel children="Form Name:" />
-              <FilledInput fullWidth name="name" onChange={(event) => handleNameChangeEvent(event)} />
+              <FilledInput fullWidth required name="name" onChange={(event) => handleNameChangeEvent(event)} />
             </FormControl>
             <FormControl fullWidth className="space-up">
               <InputLabel children="Category:" />
-              <FilledInput fullWidth name="category" onChange={(event) => handleCategoryChangeEvent(event)} />
+              <FilledInput fullWidth required name="category" onChange={(event) => handleCategoryChangeEvent(event)} />
             </FormControl>
             <FormControl fullWidth className="space-up">
               <InputLabel children="Description:" />
-              <FilledInput fullWidth name="description" onChange={(event) => handleDescriptionChangeEvent(event)} />
+              <FilledInput fullWidth  name="description" onChange={(event) => handleDescriptionChangeEvent(event)} />
             </FormControl>
         </div>
 
@@ -175,7 +175,7 @@ function App() {
           <h4>Add Elements</h4>
           <FormControl fullWidth className="space-up">
             <InputLabel children="Field Name:" />
-            <FilledInput fullWidth name="fieldName" onChange={(event) => handleFieldNameChangeEvent(event)} />
+            <FilledInput fullWidth required name="fieldName" onChange={(event) => handleFieldNameChangeEvent(event)} />
           </FormControl>
 
           <FormControl fullWidth className="space-up">
@@ -189,7 +189,9 @@ function App() {
 
 
 
+              
 
+     <div className="hide"> 
           <FormControl fullWidth className="space-up white-text">
             <InputLabel children="Add Attributes Name:" />
             <Select  name="attributeName" onChange={(event) => handleAttributeNameSelectEvent(event)}>
@@ -205,6 +207,14 @@ function App() {
           </FormControl>
 
           <button type="button" className="btn btn-primary space-up fullwidth" onClick={() => handleAddAttrClickEvent()}>Add Attribute</button>
+
+
+              
+
+
+
+
+
 
 
           <FormControl fullWidth className="space-up white-text">
@@ -234,6 +244,7 @@ function App() {
           </FormControl>
           
           <button type="button" className="btn btn-primary space-up fullwidth" onClick={() => handleAddValidationClickEvent()}>Add Validation</button>
+        </div>
         </div>
         <button type="button" className="btn btn-danger space-up fullwidth" onClick={() => handleAddFieldBtnClickEvent(currentType)}>Add Field</button>
       </div>

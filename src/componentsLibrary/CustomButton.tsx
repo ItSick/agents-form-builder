@@ -2,14 +2,15 @@ import React, {useState} from "react";
 import { Button } from '@material-ui/core';
 
 interface ICustomButton {    
-    fieldName: string
+    fieldName: string;
+    onClickEvent: (fieldName: string) => any;
 }
 
-const CustomButton:React.FC<ICustomButton> = ({fieldName}) => {
-    const [InputValue, setInputValue] = useState('');
+const CustomButton:React.FC<ICustomButton> = ({fieldName,onClickEvent}) => {
+    
     return (
         <div>
-           <Button variant="contained" color="primary" value={fieldName} href="#contained-buttons"></Button>
+           <Button fullWidth variant="outlined"  color="primary"  onClick={() => onClickEvent(fieldName)}>{fieldName}</Button>
         </div>
     );
 }
